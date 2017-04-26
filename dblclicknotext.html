@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script src="../jquery/jquery-1.9.1.min.js"></script>
+    <script src="../jquery/js/jquery-ui-1.10.3.custom.js"></script>
+    <link href="../jquery/css/cupertino/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+    <link rel="stylesheet" href="../jquery/themes/base/jquery.ui.all.css">
+    <script src="../jquery/ui/jquery.ui.core.js"></script>
+    <script src="../jquery/ui/jquery.ui.widget.js"></script>
+    <script src="../jquery/ui/jquery.ui.position.js"></script>
+    <script src="../jquery/ui/jquery.ui.menu.js"></script>
+    <script src="../jquery/ui/jquery.ui.autocomplete.js"></script>
+    <link rel="stylesheet" href="css/demos.css"/>
+    <script type="text/javascript">
+        /**
+         * IE：document.selection 　　FireFox：window.getSelection() 　　document.selection只有IE支持，window.getSelection()也只有FireFox和   Safari支持，都不是标准语法。
+         * selection   对象
+         * --------------------------------------------------------------------------------
+         * 代表了当前激活选中区，即高亮文本块，和/或文档中用户可执行某些操作的其它元素。
+         * selection   对象的典型用途是作为用户的输入，以便识别正在对文档的哪一部分正在处理，或者作为某一操作的结果输出给用户。
+         * 用户和脚本都可以创建选中区。用户创建选中区的办法是拖曳文档的一部分。脚本创建选中区的办法是在文本区域或类似对象上调用   select   方法。要获取当前选中区，请对   document   对象应用   selection   关键字。要对选中区执行操作，请先用   createRange   方法从选中区创建一个文本区域对象。
+         * 一个文档同一时间只能有一个选中区。选中区的类型决定了其中为空或者包含文本和/或元素块。尽管空的选中区不包含任何内容，你仍然可以用它作为文档中的位置标志。
+         */
+        $(document).ready(function () {
+            var clearSelection = function () {
+                if (document.selection && document.selection.empty){
+                    document.selection.empty();
+                }else if(window.getSelection){
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                }
+            };
+
+            $(element).bind("dblclick",function(event){
+                clearSelection();
+                $("#div-log").html($("#div-log").html()+"<p>"+"鼠标双击事件,灰色区域内文本未被选中"+"</p>");
+            });
+        });
+    </script>
+    <style type="text/css">
+        body {
+            font:62.5% "Trebuchet MS", sans-serif;
+            margin:64px;
+        }
+        #h2-caption {
+            font:20px "Trebuchet MS", sans-serif;
+        }
+        p {
+            font:13.5px "Trebuchet MS", sans-serif;
+        }
+        .demoHeaders {
+            margin-top:2em;
+        }
+        #div-log {
+            font:13.5px "Trebuchet MS", sans-serif;
+        }
+    </style>
+    <title>超实用的jQuery代码段</title>
+</head>
+<body>
+<h2 id="h2-caption">超实用的jQuery代码段 - jQuery双击不选中文本的方法</h2>
+<hr><br>
+<p>鼠标双击测试区域(灰色):</p>
+<div id="element" style="background-color:#E8E8E8">dblclick selection text<br>dblclick selection text<br>dblclick selection text<br>dblclick selection text<br>dblclick selection text<br>dblclick selection text</div>
+<br><hr>
+<div id="div-log">
+    <p>日志记录：</p>
+</div>
+</body>
+</html>
